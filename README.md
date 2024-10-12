@@ -59,7 +59,10 @@ $commandMetadata = [Management.Automation.CommandMetadata]::new((Get-Command $Cm
 $proxyScript = [string]([Management.Automation.ProxyCommand]::Create($commandMetadata))
 ```
 
-可以獲取到原生函式轉發啟動 C#函式 的原始碼，有轉發的原始碼就好好辦拉，動態插入代碼就可以代理了  
+可以獲取到原生函式的[轉發介面原始碼](https://github.com/hunandy14/CmdletProxy/blob/main/function/Get-Item.ps1)  
+有原始碼就好好辦了，動態插入代碼就可以實現代理了  
+這邊對於 Get-Item 的 Path 參數修改是在[第61行](https://github.com/hunandy14/CmdletProxy/blob/main/function/Get-ItemProxy.ps1#L61)  
+對於管道參數的修改是在[第79行](https://github.com/hunandy14/CmdletProxy/blob/main/function/Get-ItemProxy.ps1#L79)  
 
 一個讓我比較猶豫的點是使用了內建變數 $_ 來當作類閉包的注入參數  
 缺點就是編譯器會跳警告，暫時沒有更好的想法先這樣放著了  
