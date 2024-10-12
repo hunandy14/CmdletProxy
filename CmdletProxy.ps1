@@ -73,3 +73,20 @@ function CmdletProxy {
 # $scriptContent > '.\test\Get-ItemTest.ps1'
 # & $scriptContent '.\test\File```[[0-9]`].txt','.\test\File```[0-1`].txt'
 # '.\test\File```[[0-9]`].txt','.\test\File```[0-1`].txt'|& $scriptContent
+
+
+
+# 測試其他函式 Get-ChildItem
+# & (CmdletProxy 'Get-ChildItem' -ParamNameScriptBlock @{
+#     Path = {
+#         $_ = $_ -replace '`', '``'
+#     }
+# }) '.\test\File```[[0-9]`].txt','.\test\File```[0-1`].txt'
+
+# 測試其他函式 Set-Location
+# & (CmdletProxy 'Set-Location' -ParamNameScriptBlock @{
+#     Path = {
+#         Write-Host 已劫持到Path參數輸入: $_ 不執行強制退出 -BackgroundColor DarkGreen -ForegroundColor Green
+#         exit 1
+#     }
+# }) 'test'
